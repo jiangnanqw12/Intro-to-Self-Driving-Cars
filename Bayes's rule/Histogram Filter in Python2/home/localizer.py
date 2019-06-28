@@ -20,7 +20,24 @@ def sense(color, grid, beliefs, p_hit, p_miss):
     #
     # TODO - implement this in part 2
     #
+    height=len(grid)
+    width=len(grid[0])
+    s=0
+    for i,row in enumerate(grid):
+        
+        for j,col in enumerate(row):
 
+            if color==col:
+                beliefs[i][j]=beliefs[i][j]*p_hit
+            else:
+                beliefs[i][j]=beliefs[i][j]*p_miss
+            s+=beliefs[i][j]
+        
+       
+    for i in range(height):
+        for j in range(width):
+            beliefs[i][j]/=s
+    new_beliefs=beliefs            
     return new_beliefs
 
 def move(dy, dx, beliefs, blurring):
