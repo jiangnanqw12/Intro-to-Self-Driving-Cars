@@ -1,4 +1,4 @@
-import pdb
+#import pdb
 from helpers import normalize, blur
 
 def initialize_beliefs(grid):
