@@ -25,3 +25,4 @@ test_state = [10, 3]
 test_dt = 5
 
 test_output = predict_state(test_state, test_dt)
+print(test_output)

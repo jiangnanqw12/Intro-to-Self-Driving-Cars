@@ -12,8 +12,9 @@ def predict_state(state, dt):
     ## These should be calculated based on the contant motion model:
     ## distance = x + velocity*time
     
-    predicted_x = 0
-    predicted_vel = 0
+    predicted_x = state[0]
+    predicted_vel = state[1]
+    predicted_x += predicted_vel*dt
     
     # Constructs the predicted state and returns it
     predicted_state = [predicted_x, predicted_vel]
@@ -28,3 +29,4 @@ test_state = [10, 3]
 test_dt = 5
 
 test_output = predict_state(test_state, test_dt)
+print(test_output)
