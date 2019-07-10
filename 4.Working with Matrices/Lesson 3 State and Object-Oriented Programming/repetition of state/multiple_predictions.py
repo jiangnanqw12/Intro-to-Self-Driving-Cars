@@ -20,7 +20,8 @@ state_est2 = predict_state(state_est1, 3)
 ## Then, click Test Run to see your results!
 
 ## 1 more second after the second state estimate
-state_est3 = 0
+state_est3 = predict_state(state_est1, 1)
 
 ## 4 more seconds after the third estimated state
-state_est4 = 0
+state_est4 = predict_state(state_est1, 4)
+
