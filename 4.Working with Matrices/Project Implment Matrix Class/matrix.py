@@ -62,7 +62,7 @@ class Matrix(object):
             determinant=self.g[0][0]*self.g[1][1]-self.g[1][0]*self.g[0][1]
         elif self.h==1:
             determinant=self.g[0][0]
-        self.d=determinant
+        return determinant
     def trace(self):
         """
         Calculates the trace of a matrix (sum of diagonal entries).
@@ -74,7 +74,7 @@ class Matrix(object):
         trace=0
         for i in range(self.h):
             trace+=self.g[i][i]
-        self.t=trace
+        return trace
     def inverse(self):
         """
         Calculates the inverse of a 1x1 or 2x2 Matrix.
@@ -90,18 +90,18 @@ class Matrix(object):
             b=self.g[0][1]
             c=self.g[1][0]
             d=self.g[1][1]
-            if self.d==0:
+            if self.determinant()==0:
                 raise ValueError('The matrix is a non-invertible')
-            matrix_inverse=self.g
-            matrix_inverse[0][0]=d/delta
-            matrix_inverse[0][1]=-b/delta
-            matrix_inverse[1][0]=-c/delta
-            matrix_inverse[1][1]=a/delta
+            matrix_inverse=zeroes(self.h,self.w)
+            matrix_inverse.g[0][0]=d/self.determinant()
+            matrix_inverse.g[0][1]=-b/self.determinant()
+            matrix_inverse.g[1][0]=-c/self.determinant()
+            matrix_inverse.g[1][1]=a/self.determinant()
             
         elif self.h==1:
             
-            matrix_inverse=[[1/self.g[0][0]]]
-        return Matrix(matrix_inverse)
+            matrix_inverse=Matrix([[1/self.g[0][0]]])
+        return matrix_inverse
     def T(self):
         """
         Returns a transposed copy of this Matrix.
@@ -233,11 +233,12 @@ class Matrix(object):
             # TODO - your code here
             #
                            
-            Matrix_rmul=self.g
+            Matrix_rmul=[]
             for i in range(self.h):
-                          
+                row=[]         
                 for j in range(self.w):
-                    Matrix_rmul[i][j]*=other
+                    row.append(self.g[i][j]*other)
+                Matrix_rmul.append(row)
                            
         
         return Matrix(Matrix_rmul)
