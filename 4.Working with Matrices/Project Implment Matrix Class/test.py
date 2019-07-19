@@ -60,7 +60,14 @@ def test():
 
 
     assert equal(-I2, I2_neg), "Error in your __neg__ function"
+    print(I2)
+    print(-I2)
+    print(I2)
+    print(I2_neg)
+    print(I2 + I2_neg)
+    print(zero)
     assert equal(I2 + I2_neg, zero), "Error in your __add__ function"
+    
     assert equal(m1 * m2, m1_x_m2), "Error in your __mul__ function"
     assert equal(m2 * m1, m2_x_m1), "Error in your __mul__ function"
     assert equal(m3.inverse(), m3_inv), """Error in your inverse function for the 1 x 1 case"""
