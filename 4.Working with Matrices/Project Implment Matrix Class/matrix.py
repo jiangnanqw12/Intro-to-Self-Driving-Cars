@@ -108,10 +108,10 @@ class Matrix(object):
         """
         # TODO - your code here
         matrix_transposed=[]
-        for i in self.w:
+        for i in range(self.w):
             row=[]
-            for j in self.h:
-                row.append(self.g[i][j])
+            for j in range(self.h):
+                row.append(self.g[j][i])
                 #matrix_transposed[i][j]=self.g[j][j]
             matrix_transposed.append(row)
         return Matrix(matrix_transposed)
@@ -156,10 +156,13 @@ class Matrix(object):
         #   
         # TODO - your code here
         #
-        Matrix_sum=self.g
+        Matrix_sum=[]
+        print('type(self.g)',type(self.g))
         for r in range(self.h):
+            row=[]
             for c in range(self.w):
-                Matrix_sum[r][c]=self.g[r][c]+other.g[r][c]
+                row.append(self.g[r][c]+other.g[r][c])
+            Matrix_sum.append(row)
         return Matrix(Matrix_sum)
 
     def __neg__(self):

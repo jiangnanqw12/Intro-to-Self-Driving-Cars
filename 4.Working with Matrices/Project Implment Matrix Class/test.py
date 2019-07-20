@@ -60,32 +60,45 @@ def test():
 
 
     assert equal(-I2, I2_neg), "Error in your __neg__ function"
-    print(I2)
-    print(-I2)
-    print(I2)
-    print(I2_neg)
-    print(I2 + I2_neg)
-    print(zero)
-    #assert equal(I2 + I2_neg, zero), "Error in your __add__ function"
+    
+    #print('I2',I2)
+    #print(-I2)
+    #print(I2)
+    #print(I2_neg)
+    #print(I2 + I2_neg)
+    #print(zero)
+    
+    assert equal(I2 + I2_neg, zero), "Error in your __add__ function"
+    #print('I2',I2)
+    #print('I2_neg',I2_neg)
     
     assert equal(m1 * m2, m1_x_m2), "Error in your __mul__ function"
     assert equal(m2 * m1, m2_x_m1), "Error in your __mul__ function"
     assert equal(m3.inverse(), m3_inv), """Error in your inverse function for the 1 x 1 case"""
-    print(m1_x_m2.inverse())
-    print(m1_m2_inv)
+    #print(m1_x_m2.inverse())
+    #print(m1_m2_inv)
     assert equal(m1_x_m2.inverse(), m1_m2_inv), """Error in your inverse function for the first 2 x 2 case"""
     assert equal(I2.inverse(), I2), """Error in your inverse function for the second 2 x 2 case"""
+    #print('I2',I2)
+    #print('top_ones.T()',top_ones.T())
+    #print('top_ones',top_ones)
+    #print('left_ones',left_ones)
+    
     assert equal(top_ones.T(), left_ones), "Error in your T function (transpose)"
     assert equal(left_ones.T(), top_ones), "Error in your T function (transpose)"
     assert equal(top_ones - left_ones.T(), m.zeroes(2,2)), "Error in your __sub__ function"
     assert (4*m.identity(5))[0][0] == 4, "Error in your __rmul__ function"
     assert (4*m.identity(5)).trace() == 20 , "Error in your trace function"
-
+    #print('I2',I2)
     assert type(-I2) == type(I2_neg), "Error: Your __neg__ function does not return a Matrix does not return a Matrix"
+    print('I2',I2)
     assert type(I2 + I2_neg) == type(zero), "Error: Your __add__ function does not return a Matrix"
+    print('I2',I2)
     assert type(m1 * m2) == type(m1_x_m2), "Error: Your __mul__ function does not return a Matrix"
     assert type(m2 * m1) == type(m2_x_m1), "Error: Your __mul__ function does not return a Matrix"
     assert type(m3.inverse()) == type(m3_inv), """Error: Your inverse function for the 1 x 1 case does not return a Matrix"""
+    #print('I2',I2)
+    print('I2.inverse()',I2.inverse())
     assert type(I2.inverse()) == type(I2), """Error: Your inverse function for the 2 x 2 case does not return a Matrix"""
     assert type(top_ones.T()) == type(left_ones), "Error: Your T function (transpose) does not return a Matrix"
     assert type(left_ones.T()) == type(top_ones), "Error: Your T function (transpose) does not return a Matrix"
