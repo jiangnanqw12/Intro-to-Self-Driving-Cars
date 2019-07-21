@@ -91,16 +91,24 @@ class Matrix(object):
             c=self.g[1][0]
             d=self.g[1][1]
             if self.determinant()==0:
+                
                 raise ValueError('The matrix is a non-invertible')
+            '''
             matrix_inverse=zeroes(self.h,self.w)
             matrix_inverse.g[0][0]=d/self.determinant()
             matrix_inverse.g[0][1]=-b/self.determinant()
             matrix_inverse.g[1][0]=-c/self.determinant()
             matrix_inverse.g[1][1]=a/self.determinant()
+            '''
+            matrix_inverse=1.0 / self.determinant() * (self.trace() * identity(self.h) - self)
+            
+            
+       
             
         elif self.h==1:
             
             matrix_inverse=Matrix([[1/self.g[0][0]]])
+            
         return matrix_inverse
     def T(self):
         """
@@ -157,14 +165,20 @@ class Matrix(object):
         # TODO - your code here
         #
         Matrix_sum=[]
-        print('type(self.g)',type(self.g))
+        
+        #print('type(self.g)',type(self.g))
+        Matrix_sum=Matrix([[self[i][j]+other[i][j] for j in range(self.w)] for i in range(self.h)])
+        '''                       
         for r in range(self.h):
+                          
             row=[]
             for c in range(self.w):
                 row.append(self.g[r][c]+other.g[r][c])
             Matrix_sum.append(row)
-        return Matrix(Matrix_sum)
-
+        
+        #Matrix([[self[i][j] + other[i][j] for j in range(self.w)] for i in range(self.h)]) 
+        '''
+        return Matrix_sum
     def __neg__(self):
         """
         Defines the behavior of - operator (NOT subtraction)
@@ -182,7 +196,9 @@ class Matrix(object):
         #
         #Matrix_neg=self.g
         Matrix_neg=[]
+        Matrix_neg=Matrix([[-self[i][j] for j in range(self.w)] for i in range(self.h)])                 
         #print('test_neg',self.g)
+        '''
         for i in range(self.h):
             row=[]
             for j in range(self.w):
@@ -190,8 +206,10 @@ class Matrix(object):
             Matrix_neg.append(row)
                 #Matrix_neg[i][j]=-Matrix_neg[i][j]
         #print('test_neg2',self.g)        
-        return Matrix(Matrix_neg)
-    
+        
+        '''
+        return Matrix_neg
+          
     
     def __sub__(self, other):
         """
