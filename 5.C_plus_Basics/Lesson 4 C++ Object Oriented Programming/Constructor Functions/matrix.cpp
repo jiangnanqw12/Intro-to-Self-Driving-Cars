@@ -17,7 +17,13 @@
 **      number of rows in a matrix.
 **
 */
-
+Matrix::Matrix()
+{
+    std::vector<std::vector<float>> initial_grid(4,(std::vector<float> (4,0)));
+    grid=initial_grid;
+    rows=grid.size();
+    cols=grid[0].size();
+}
 /* TODO: Define a constructor that receives a 2-Dimensional vector
 **       and assigns the vector to the grid variable. 
 **       
@@ -32,3 +38,9 @@
 **      as you did for the default constructor.
 **
 */
+Matrix::Matrix(std::vector<std::vector<float>> initial_grid)
+{
+    grid=initial_grid;
+    rows=grid.size();
+    cols=grid[0].size();
+}
