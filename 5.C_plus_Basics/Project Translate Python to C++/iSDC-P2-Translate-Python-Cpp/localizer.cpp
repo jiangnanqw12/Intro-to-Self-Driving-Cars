@@ -40,10 +40,14 @@ using namespace std;
            0.25 0.25
 */
 vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) {
-	vector< vector <float> > newGrid;
+	
 
 	// your code here
+	vector<float>::size_type rows=grid.size();
+	vector<float>::size_type cols=grid[0].size();
+	float belif=1.0/rows/cols;
 	
+	vector< vector <float> > newGrid(rows,vector<float>(cols,belif));
 	return newGrid;
 }
 
@@ -89,11 +93,22 @@ vector< vector <float> > move(int dy, int dx,
   float blurring) 
 {
 
-  vector < vector <float> > newGrid;
+	vector<float>::size_type rows=beliefs.size();
+	vector<float>::size_type cols=beliefs[0].size();
+	vector < vector <float> > newGrid(rows,vector<float>(cols,0));
+	int new_i,new_j;
+	// your code here
+	for(int i=0;i<rows;i++)
+	{
+		for(int j=0;j<cols;j++)
+		{
+			new_i=(i+dx)%rows;
+			new_j=(j+dy)%cols;
+			newGrid[new_i][new_j]=beliefs[i][j];
+		}
+	}
 
-  // your code here
-
-  return blur(newGrid, blurring);
+	return blur(newGrid, blurring);
 }
 
 
