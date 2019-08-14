@@ -35,9 +35,25 @@ using namespace std;
 vector< vector<float> > normalize(vector< vector <float> > grid) {
 	
 	vector< vector<float> > newGrid;
-
+	vector<float>::size_type rows=grid.size();
+	vector<float>::size_type cols=grid[0].size();
+	float s=0;
+	for(int i=0;i<rows;i++)
+	{
+		for(int j=0;j<cols;j++)
+		{
+			s+=grid[i][j];
+		}
+	}
+	for(int i=0;i<rows;i++)
+	{
+		for(int j=0;j<cols;j++)
+		{
+			grid[i][j]/=s;
+		}
+	}
 	// todo - your code here
-
+	newGrid=grid;
 	return newGrid;
 }
 
@@ -79,6 +95,37 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
 	vector < vector <float> > newGrid;
 	
 	// your code here
+	vector<float>::size_type rows=grid.size();
+	vector<float>::size_type cols=grid[0].size();
+	float center_prob=1-blurring;
+	float corner_prob=blurring/12.0;
+	float adjacent_prob=blurring/6.0;
+
+	vector<vector<float>> window=
+	{
+		{corner_prob,adjacent_prob,corner_prob},
+		{adjacent_prob,center_prob,adjacent_prob},
+		{corner_prob,adjacent_prob,corner_prob}
+	};
+
+	newGrid=vector<vector<float>> (rows,vector<float>(cols,0));
+	for(int i=0;i<rows;i++)
+	{
+		for(int j=0;j<cols;j++)
+		{
+			float grid_val=grid[i][j];
+			for(int dx=-1;dx<2;dx++)
+			{
+				for(int dy=-1;dy<2;dy++)
+				{
+					float mult=window[dx+1][dy+1];
+					int new_i=(i+dy)%rows;
+					int new_j=(j+dx)%cols;
+					newGrid[new_i][new_j]+=mult*grid_val;
+				}
+			}
+		}
+	}
 
 	return normalize(newGrid);
 }

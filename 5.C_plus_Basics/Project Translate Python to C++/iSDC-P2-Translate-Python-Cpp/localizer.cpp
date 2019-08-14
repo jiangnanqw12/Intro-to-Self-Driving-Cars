@@ -158,6 +158,19 @@ vector< vector <float> > sense(char color,
 	vector< vector <float> > newGrid;
 
 	// your code here
+	vector<float>::size_type rows=beliefs.size();
+	vector<float>::size_type cols=beliefs[0].size();
+	//newGrid=vector<vector<float>> (rows,vector<float>(cols,0));
+	
+	for(int i=0;i<rows;i++)
+	{
+		for(int j=0;j<cols;j++)
+		{
+			int HIT=(grid[i][j]==color);
 
+			beliefs[i][j]*=HIT*p_hit+(1-HIT)*p_miss;
+		}
+	}
+	newGrid=beliefs;
 	return normalize(newGrid);
 }
