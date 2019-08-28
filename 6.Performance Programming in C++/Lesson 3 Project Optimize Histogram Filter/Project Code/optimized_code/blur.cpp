@@ -3,7 +3,7 @@
 using namespace std;
 
 // OPTIMIZATION: Pass large variable by reference
-vector < vector <float> > blur(vector < vector < float> > grid, float blurring) {
+vector < vector <float> > blur(vector < vector < float> > &grid, float blurring) {
 
 	// OPTIMIZATION: window, DX and  DY variables have the 
     // same value each time the function is run.
@@ -22,14 +22,14 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
 
 	int height;
 	int width;
-	float center, corner, adjacent;
+	//float center, corner, adjacent;
 
 	height = grid.size();
 	width = grid[0].size();
 
-	center = 1.0 - blurring;
-	corner = blurring / 12.0;
-	adjacent = blurring / 6.0;
+	static float center = 1.0 - blurring;
+	static float corner = blurring / 12.0;
+	static float adjacent = blurring / 6.0;
 
 	int i, j;
 	float val;
@@ -92,11 +92,13 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
 	}
 
 
-	vector <int> DX;
-	vector <int> DY;
+	vector <int> DX={-1,0,1};
+	vector <int> DY={-1,0,1};
 
-	DX.push_back(-1); DX.push_back(0); DX.push_back(1);
-	DY.push_back(-1); DY.push_back(0); DY.push_back(1);
+	// DX.push_back(-1); DX.push_back(0); DX.push_back(1);
+	// DY.push_back(-1); DY.push_back(0); DY.push_back(1);
+
+	
 
 	int dx;
 	int dy;
@@ -108,13 +110,15 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
 	float newVal;
 
 	// OPTIMIZATION: Use your improved zeros function
-	for (i=0; i<height; i++) {
-		newRow.clear();
-		for (j=0; j<width; j++) {
-			newRow.push_back(0.0);
-		}
-		newGrid.push_back(newRow);
-	}
+	newGrid=vector<vector<float>>(height,vector<float>(width,0.0));
+	
+	// for (i=0; i<height; i++) {
+	// 	newRow.clear();
+	// 	for (j=0; j<width; j++) {
+	// 		newRow.push_back(0.0);
+	// 	}
+	// 	newGrid.push_back(newRow);
+	// }
 
 	for (i=0; i< height; i++ ) {
 		for (j=0; j<width; j++ ) {
