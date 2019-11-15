@@ -5,7 +5,17 @@
 # our nextDay procedure assumes all months have 30 days
 # (hence a year is 360 days, instead of 365).
 # 
-
+def isBefore(year1, month1, day1, year2, month2, day2):
+    
+    if year1<year2:
+        return True
+    elif year1==year2:
+        if month1<month2:
+            return True
+        elif month1==month2:
+            if day1<day2:
+                return True
+    return False
 def nextDay(year, month, day):
     """Simple version: assume every month has 30 days"""
     if day < 30:
@@ -21,9 +31,16 @@ def daysBetweenDates(year1, month1, day1, year2, month2, day2):
        and year2/month2/day2. Assumes inputs are valid dates
        in Gregorian calendar, and the first date is not after
        the second."""
-        
+    count=0
     # YOUR CODE HERE!
-    return
+    
+        
+    while(isBefore(year1, month1, day1, year2, month2, day2)):
+        
+        year1,month1,day1=nextDay(year1,month1,day1)
+        count+=1
+        
+    return count
 
 def test():
     test_cases = [((2012,9,30,2012,10,30),30), 
@@ -33,9 +50,9 @@ def test():
     for (args, answer) in test_cases:
         result = daysBetweenDates(*args)
         if result != answer:
-            print "Test with data:", args, "failed"
+            print("Test with data:", args, "failed")
         else:
-            print "Test case passed!"
+            print("Test case passed!")
 
 test()
-    
+#print(daysBetweenDates(2012,9,30,2012,10,30))    
